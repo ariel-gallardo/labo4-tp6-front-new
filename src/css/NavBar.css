@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300&display=swap');
+
+a{
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5em;
+    text-decoration: none;
+    color: lightgrey;
+    transition: color 0.5s;
+}
+
+a:hover{
+    color:white;
+}

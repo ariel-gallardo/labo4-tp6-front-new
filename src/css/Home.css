@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Rocker&display=swap');
+
+.Home{
+    height: 100vh;
+    border: lightgrey 2px;
+    justify-self: center;
+}
+
+.Frase{
+    font-family: 'New Rocker', cursive;
+    font-size: xx-large;
+}

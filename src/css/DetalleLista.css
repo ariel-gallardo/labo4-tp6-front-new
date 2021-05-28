@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+p, .boton{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400px;
+}
+
+.boton{
+    font-weight: bold;
+    letter-spacing: 0.1vw;
+    transition: all 0.5s;
+}
+
+.boton:hover{
+    color:white;
+}
+
+.Precio{
+    font-weight: bold;
+    font-size: 1.5vw;
+}
+
+.Envio, .Ventas{
+    font-size: small;
+}
+
+.EnvioGratis{
+    color: green;
+}
+
+.EnvioPago{
+    color: orangered;
+}
+
+.DetalleLista:hover{
+    width: 30vw;
+}

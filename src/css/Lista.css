@@ -1,0 +1,12 @@
+.Lista{
+    height: 100vh;
+}
+
+h1, .Agregar{
+    font-family: 'New Rocker', cursive;
+}
+
+.Agregar{
+    border: none;
+}
+

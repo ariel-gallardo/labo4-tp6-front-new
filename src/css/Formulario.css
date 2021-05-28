@@ -1,0 +1,17 @@
+.Formulario{
+    width: 100vw;
+}
+
+.Foto{
+    background-color: black;
+    border: none;
+    color:white;
+    text-transform: uppercase;
+    font-family: 'New Rocker', cursive;
+}
+
+button{
+    font-family: 'New Rocker', cursive;
+    border: none !important;
+    background-color: slategrey !important;
+}
