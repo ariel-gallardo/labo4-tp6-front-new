@@ -14,17 +14,22 @@ export const Lista = () =>{
         setInstrumentos(data.data._embedded.instrumentos)
     }
 
-    cargar();
+    if(instrumentos.length === 0){
+        cargar();
+    }
 
 
-    return <div class="d-flex flex-column">
+    
+    return <div className="d-flex flex-column">
         <div className="d-flex mx-auto justify-content-center Lista">
             {
                 instrumentos.length > 0 ?
                     <ul className="list-group-flush">
                         {
-                            instrumentos.map((ins, id) => {
-                                return <DetalleLista key={id} id={id + 1} instrumento={ins.instrumento} precio={ins.precio} costoEnvio={ins.costoEnvio} cantidadVendida={ins.cantidadVendida} imagen={ins.imagen} />
+                            instrumentos.map((ins) => {
+                                let tempID = ins._links.self.href.match(/\/([0-9]){1,}/)[0]
+                                tempID = tempID.substring(1, tempID.length)
+                                return <DetalleLista key={tempID} id={tempID} instrumento={ins.instrumento} precio={ins.precio} costoEnvio={ins.costoEnvio} cantidadVendida={ins.cantidadVendida} imagen={ins.imagen} />
                             })
                         }
                     </ul>
@@ -33,9 +38,8 @@ export const Lista = () =>{
                         <img src={`${process.env.PUBLIC_URL}/images/Skull.svg`} alt="Let's rock" />
                         <h1 className="text-white text-uppercase mt-lg-2">todavia no hay instrumentos</h1>
                     </div>
-
             }
         </div>
-        <Link to="/crear" class="btn btn-outline-light text-uppercase shadow-none Agregar">agregar nuevo instrumento</Link>
+        <Link to="/crear" className="btn btn-outline-light text-uppercase shadow-none Agregar">agregar nuevo instrumento</Link>
     </div>
 }

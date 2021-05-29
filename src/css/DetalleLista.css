@@ -32,6 +32,6 @@ p, .boton{
     color: orangered;
 }
 
-.DetalleLista:hover{
-    width: 30vw;
+.ElementoLista{
+    background-color: rgba(255,255,255,0.7);
 }

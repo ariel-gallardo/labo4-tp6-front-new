@@ -1,82 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router'
-import axios from 'axios'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useHistory } from "react-router-dom";
 import '../../css/Formulario.css'
 
-export const Formulario = () => {
+export const Formulario = (props) => {
 
-    let { id } = useParams();
-    const { register, handleSubmit, setValue } = useForm();
-    let [imagen, setImagen] = useState('');
-    let [existe, setExiste] = useState(false);
+    let [instrumento, setInstrumento] = useState({...props})
+    
+    const { register, handleSubmit } = useForm({
+        defaultValues: instrumento
+    });
+
+    let [imagen, setImagen] = useState(instrumento.src);
     let history = useHistory();
 
-    const enviarDatos = async (data) => {
-        try {
-            await axios.post('http://localhost:8080/instrumentos', data);
-        } catch (error) {
-            console.error(error)
-        }
-    }
 
-    const almacenarDatos = (data) => {
-        if ((id !== undefined && data.imagen !== undefined) || (data.imagen !== undefined)) {
+    const almacenarDatos = (data) => {  
+        if ( data.imagen !== undefined) {
             let reader = new FileReader();
             reader.readAsDataURL(data.imagen[0]);
             reader.onload = () => {
                 data.imagen = reader.result;
-                enviarDatos(data);
-                return history.push('/instrumentos');
+                instrumento.enviarDatos(data);
             }
+        }else{
+            data.imagen = '';
+            instrumento.enviarDatos(data);
         }
-        data.imagen = '';
-        enviarDatos(data);
-        return history.push('/instrumentos');
-    }
-
-    const cargar = () => {
-
-        if (id !== undefined) { 
-            axios.get(`http://localhost:8080/instrumentos/${id}`).then(insData => {
-                let ins = insData.data
-                setExiste(true)
-                setValue("instrumento", ins.instrumento)
-                setValue("marca", ins.marca)
-                setValue("modelo", ins.modelo)
-                setValue("precio", ins.precio)
-                setValue("cantidadVendida", ins.cantidadVendida)
-                setValue("descripcion", ins.descripcion)
-                setValue("costoEnvio", ins.costoEnvio)
-                setImagen(ins.imagen)
-            }).catch(error =>{
-                
-            })
-        }
+        history.push('/instrumentos')
     }
 
     const cambiarFoto = (event) => {
         setImagen(URL.createObjectURL(event.target.files[0]))
     }
+    
 
-    const eliminar = () => {
-            axios.delete(`http://localhost:8080/instrumentos/${id}`).then(data => {
-                alert('Eliminado satisfactoriamente')
-                history.push('/instrumentos');
-            }
-        )
-    }
-
-
-    useEffect(() =>{
-        cargar()
-    })
 
     return (
-        <div className="mx-lg-auto Formulario my-lg-5">
-            {
-                (id === undefined && existe === false) || (id !== undefined && existe === true) ?  
             <div>
                 <h1 className="text-center text-white">Formulario</h1>
                 <form className="col-lg-6 mx-auto" onSubmit={handleSubmit(almacenarDatos)}>
@@ -92,17 +52,10 @@ export const Formulario = () => {
                         <img src={imagen} alt={'no hay imagen aún'} className="img-thumbnail Foto" />
                     </div>
                     <div className="text-center">
-                                <button className="btn btn-outline-light shadow-none" type="submit">Cargar</button>
-                                {id !== undefined ? <button onClick={eliminar} className="btn btn-danger mx-2 shadow-none">Eliminar</button> : ''}
+                            <button className="btn btn-outline-light shadow-none" type="submit">Cargar</button>
                     </div>
                 </form>
             </div>
-            :
-            <h1>
-                No existe
-            </h1>
-            }
-        </div>
     )
 
 }
