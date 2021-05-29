@@ -49,7 +49,7 @@ export const Modificar = () => {
         <div>
             {
                 load ?
-                    <div>
+                    <div className="my-lg-3">
                         <Formulario
                             instrumento={instrumento.instrumento}
                             cantidadVendida={instrumento.cantidadVendida}
@@ -61,7 +61,9 @@ export const Modificar = () => {
                             src={instrumento.imagen}
                             enviarDatos={enviarDatos}
                         />
-                        <button onClick={eliminar} className="btn btn-danger mx-2 shadow-none">Eliminar</button>
+                        <div className="text-center">
+                            <div onClick={eliminar} className="btn btn-danger mx-2 shadow-none">Eliminar</div>
+                        </div>
                     </div>
                 :
                 <h1>No existe el instrumento</h1>

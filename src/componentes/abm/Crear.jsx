@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {Formulario} from './Formulario'
 import axios from 'axios'
 
@@ -10,7 +10,9 @@ export const Instrumento = {
     cantidadVendida: 0,
     descripcion: '',
     costoEnvio: 0,
-    src: ''
+    src: '',
+    imagen: '',
+    enviarDatos: ''
 }
 
 export const Crear = () =>{
@@ -27,6 +29,16 @@ export const Crear = () =>{
     }
 
     return (
-        <Formulario instrumento={instrumento} enviarDatos={enviarDatos}  />
+        <Formulario
+            instrumento={instrumento.instrumento}
+            descripcion={instrumento.descripcion}
+            marca={instrumento.marca}
+            modelo={instrumento.modelo}
+            precio={instrumento.precio}
+            costoEnvio={instrumento.costoEnvio}
+            cantidadVendida={instrumento.cantidadVendida}
+            src={instrumento.src}
+            enviarDatos={useCallback(enviarDatos)}
+        />
     )
 }

@@ -1,0 +1,11 @@
+.EnvioGratis{
+    color: green;
+}
+
+.EnvioPago{
+    color: orangered;
+}
+
+.Envio{
+    font-size: small;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {DetalleLista} from './DetalleLista';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
@@ -14,9 +14,9 @@ export const Lista = () =>{
         setInstrumentos(data.data._embedded.instrumentos)
     }
 
-    if(instrumentos.length === 0){
+    useEffect(() =>{
         cargar();
-    }
+    },[])
 
 
     
@@ -29,7 +29,7 @@ export const Lista = () =>{
                             instrumentos.map((ins) => {
                                 let tempID = ins._links.self.href.match(/\/([0-9]){1,}/)[0]
                                 tempID = tempID.substring(1, tempID.length)
-                                return <DetalleLista key={tempID} id={tempID} instrumento={ins.instrumento} precio={ins.precio} costoEnvio={ins.costoEnvio} cantidadVendida={ins.cantidadVendida} imagen={ins.imagen} />
+                                return <DetalleLista key={tempID} id={tempID} instrumento={ins.instrumento} precio={ins.precio} costoEnvio={ins.costoEnvio} cantidadVendida={ins.cantidadVendida} descripcion={ins.descripcion} imagen={ins.imagen} />
                             })
                         }
                     </ul>
@@ -40,6 +40,6 @@ export const Lista = () =>{
                     </div>
             }
         </div>
-        <Link to="/crear" className="btn btn-outline-light text-uppercase shadow-none Agregar">agregar nuevo instrumento</Link>
+        <Link to="/crear" className="btn btn-outline-dark text-uppercase shadow-none Agregar">agregar nuevo instrumento</Link>
     </div>
 }

@@ -20,16 +20,8 @@ p, .boton{
     font-size: 1.5vw;
 }
 
-.Envio, .Ventas{
+.Ventas{
     font-size: small;
-}
-
-.EnvioGratis{
-    color: green;
-}
-
-.EnvioPago{
-    color: orangered;
 }
 
 .ElementoLista{
